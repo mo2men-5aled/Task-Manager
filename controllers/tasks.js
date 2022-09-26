@@ -1,5 +1,4 @@
-const { find } = require("../models/task");
-const Task = require("../models/task");
+const Task = require("../models/Task");
 
 //find({data})
 //used for searching for a taskes with the data passed in the object in the find function
