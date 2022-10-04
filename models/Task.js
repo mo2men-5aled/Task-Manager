@@ -6,9 +6,15 @@ const TaskSchema = new mongoose.Schema({
     required: [true, "You must provide a name"],
     trim: "true",
   },
+  description: {
+    type: String,
+  },
   completed: {
     type: Boolean,
     default: false,
+  },
+  parentID: {
+    type: String,
   },
 });
 
