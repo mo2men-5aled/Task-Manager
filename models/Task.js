@@ -16,6 +16,9 @@ const TaskSchema = new mongoose.Schema({
   parentID: {
     type: String,
   },
+  user_id: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Task", TaskSchema);

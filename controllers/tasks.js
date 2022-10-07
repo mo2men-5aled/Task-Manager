@@ -4,7 +4,7 @@ const asyncWrapper = require("../middleware/async");
 //used for searching for a taskes with the data passed in the object in the find function
 
 const getAllTasks = asyncWrapper(async (req, res) => {
-  const tasks = await Task.find({});
+  const tasks = await Task.find({ user_id: req.query.userID });
   res.status(200).json({ tasks });
 });
 

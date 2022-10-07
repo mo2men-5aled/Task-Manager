@@ -74,14 +74,13 @@ const findUser = async (req, res) => {
   }
 
   //validate wrong username
-  if (!(await (await User.find({ email: req.body.email })).length)) {
+  if (!(await await User.find({ email: req.body.email }))) {
     errorlist.push("user not signed up or wrong email please try again");
   }
+
   if (
-    !(await (await User.find({ password: req.body.password })).length) &&
-    !(await (
-      await User.find({ email: req.body.email })
-    ).length)
+    (await await User.find({ email: req.body.email })) &&
+    !(await await User.find({ password: req.body.password })).length
   ) {
     errorlist.push("Wrong Password");
   }
@@ -92,7 +91,7 @@ const findUser = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    res.status(201).json({ userId: user[0]["_id"] });
+    res.status(201).json({ userId: user[0]._id });
   }
 };
 module.exports = { createUser, findUser };
