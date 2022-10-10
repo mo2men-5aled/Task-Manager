@@ -7,9 +7,9 @@ const {
   updateTask,
   deleteTask,
 } = require("../controllers/tasks");
-const { createUser, findUser } = require("../controllers/users");
+const { createUser, findUser, FindUserById } = require("../controllers/users");
 
-router.route("/login").post(findUser);
+router.route("/login").post(findUser).get(FindUserById);
 router.route("/signup").post(createUser);
 router.route("/").get(getAllTasks).post(createTask);
 router.route("/:id").get(getTask).patch(updateTask).delete(deleteTask);

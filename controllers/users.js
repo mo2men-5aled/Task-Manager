@@ -10,19 +10,36 @@ function containsCapital(str) {
   return res;
 }
 
+//find if the user id in the url found
+const FindUserById = (req, res) => {
+  var id = req.query.userID;
+  if (id.length == 24) {
+    User.findById(id).then((response) => {
+      if (response) {
+        res.status(200).json({ found: true });
+      } else {
+        res.json({ found: false });
+      }
+    });
+  } else {
+    res.json({ found: false });
+  }
+};
+
+//sign up
 const createUser = async (req, res) => {
   try {
     var errorlist = [];
     //validate password against special chars
     var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     if (!format.test(req.body.password)) {
-      errorlist.push("must contain a special character");
+      errorlist.push("Password must contain a special character");
     }
     if (req.body.password.length < 8) {
-      errorlist.push("must contain at least 8 letters");
+      errorlist.push("Password must contain at least 8 letters");
     }
     if (!containsCapital(req.body.password)) {
-      errorlist.push("must contain capital letter");
+      errorlist.push("Password must contain capital letter");
     }
     //validate first name
     if (!req.body.first_name.length) {
@@ -60,6 +77,7 @@ const createUser = async (req, res) => {
   }
 };
 
+//log in
 const findUser = async (req, res) => {
   var errorlist = [];
 
@@ -94,4 +112,4 @@ const findUser = async (req, res) => {
     res.status(201).json({ userId: user[0]._id });
   }
 };
-module.exports = { createUser, findUser };
+module.exports = { createUser, findUser, FindUserById };
