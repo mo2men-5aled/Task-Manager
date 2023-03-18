@@ -7,7 +7,11 @@ const notFound = require("./middleware/not-found");
 const errorHandler = require("./middleware/errorHandler");
 const cors = require("cors");
 //middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 app.use(errorHandler);
 
